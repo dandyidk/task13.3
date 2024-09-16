@@ -5,10 +5,28 @@ from keras import datasets
 from sklearn.preprocessing import OneHotEncoder
 from neuralnetwork import Neural_network
 
-(train_images,test_images),(train_labels,test_labels)=datasets.mnist.load_data()
+train_images_name = r"C:\Users\DELL\Documents\Data\train-images.idx3-ubyte"
+test_images_name = r"C:\Users\DELL\Documents\Data\t10k-images.idx3-ubyte"
+train_labels_name = r"C:\Users\DELL\Documents\Data\train-labels.idx1-ubyte"
+test_labels_name = r"C:\Users\DELL\Documents\Data\t10k-labels.idx1-ubyte"
 
-train_images = train_images.reshape(train_images.shape[0], -1) / 255.0  # Flatten and normalize
-test_images = test_images.reshape(test_images.shape[0], -1) / 255.0      # Flatten and normalize
+def load_images(filename):
+    with open(filename, 'rb') as f:
+        magic, num_images, rows, cols = struct.unpack(">IIII", f.read(16))
+        images = np.frombuffer(f.read(), dtype=np.uint8)
+        images = images.reshape(num_images, rows * cols)
+        return images / 255.0  # Normalize pixel values
+
+def load_labels(filename):
+    with open(filename, 'rb') as f:
+        magic, num_labels = struct.unpack(">II", f.read(8))
+        labels = np.frombuffer(f.read(), dtype=np.uint8)
+        return labels
+
+train_images = load_images(train_images_name)
+test_images = load_images(test_images_name)
+train_labels = load_labels(train_labels_name)
+test_labels = load_labels(test_labels_name)
 
 learn_rate = 0.01
 
