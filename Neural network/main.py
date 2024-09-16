@@ -5,10 +5,10 @@ from keras import datasets
 from sklearn.preprocessing import OneHotEncoder
 from neuralnetwork import Neural_network
 
-train_images_name = r"C:\Users\DELL\Documents\Data\train-images.idx3-ubyte"
-test_images_name = r"C:\Users\DELL\Documents\Data\t10k-images.idx3-ubyte"
-train_labels_name = r"C:\Users\DELL\Documents\Data\train-labels.idx1-ubyte"
-test_labels_name = r"C:\Users\DELL\Documents\Data\t10k-labels.idx1-ubyte"
+train_images_name = r"train-images.idx3-ubyte"
+test_images_name = r"t10k-images.idx3-ubyte"
+train_labels_name = r"train-labels.idx1-ubyte"
+test_labels_name = r"t10k-labels.idx1-ubyte"
 
 def load_images(filename):
     with open(filename, 'rb') as f:
